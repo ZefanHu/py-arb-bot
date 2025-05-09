@@ -1,0 +1,38 @@
+    # Python
+    __pycache__/
+    *.py[cod]
+    *$py.class
+    *.egg-info/
+    .env
+    env/
+    venv/
+    ENV/
+    pip-selfcheck.json
+
+    # Conda
+    .conda/
+    conda-meta/
+
+    # IDE and editor files
+    .idea/
+    .vscode/
+    *.swp
+    *~
+    .DS_Store
+
+    # Logs and data
+    arb_bot/logs/
+    *.log
+    *.sqlite
+    *.db
+
+    # Secrets
+    arb_bot/config/secrets.yaml
+
+    # Notebook checkpoints
+    .ipynb_checkpoints
+
+    # Operating system files
+    Thumbs.db
+    ehthumbs.db
+    
