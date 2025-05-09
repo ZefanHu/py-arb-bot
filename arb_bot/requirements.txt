@@ -1,12 +1,5 @@
-    # 用于读取YAML配置文件
-    pyyaml
+pyyaml
+httpx[http2]
+websockets
+requests
 
-    # OKX SDK 依赖
-    httpx[http2]
-    websockets==6.0 # 根据SDK README的建议
-    requests        # SDK的websocket_example.py中用到，可考虑移除
-
-    # (其他未来可能需要的库)
-    # pandas
-    # numpy
-    

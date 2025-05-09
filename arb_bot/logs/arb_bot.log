@@ -1,0 +1,277 @@
+2025-05-09 18:53:39 - __main__ - INFO - Logging to file: /home/huzefan/py-arb-bot/arb_bot/logs/arb_bot.log
+2025-05-09 18:53:39 - __main__ - INFO - Settings loaded successfully from /home/huzefan/py-arb-bot/arb_bot/config/settings.yaml
+2025-05-09 18:53:39 - __main__ - INFO - Secrets loaded successfully from /home/huzefan/py-arb-bot/arb_bot/config/secrets.yaml
+2025-05-09 19:02:12 - __main__ - INFO - Logging to file: /home/huzefan/py-arb-bot/arb_bot/logs/arb_bot.log
+2025-05-09 19:02:12 - __main__ - INFO - Settings loaded successfully from /home/huzefan/py-arb-bot/arb_bot/config/settings.yaml
+2025-05-09 19:02:12 - __main__ - INFO - Secrets loaded successfully from /home/huzefan/py-arb-bot/arb_bot/config/secrets.yaml
+2025-05-09 19:02:12 - __main__ - INFO - Configuration loaded. Mode: Simulated
+2025-05-09 19:02:12 - __main__ - INFO - OKX API Clients initialized.
+2025-05-09 19:02:12 - __main__ - INFO - --- Testing REST APIs ---
+2025-05-09 19:02:12 - __main__ - INFO - Account balance fetched successfully.
+2025-05-09 19:02:12 - __main__ - INFO - Balance for BTC: Avail: 1, Frozen: 0
+2025-05-09 19:02:12 - __main__ - INFO - Balance for OKB: Avail: 100, Frozen: 0
+2025-05-09 19:02:12 - __main__ - INFO - Balance for USDT: Avail: 3613.885999, Frozen: 0
+2025-05-09 19:02:12 - __main__ - INFO - Balance for USDC: Avail: 2498.000175, Frozen: 0
+2025-05-09 19:02:12 - __main__ - INFO - Balance for ETH: Avail: 0.4, Frozen: 0
+2025-05-09 19:02:12 - __main__ - INFO - 
+Fetching SPOT BTC-USDT instrument details:
+2025-05-09 19:02:12 - __main__ - INFO - Instrument details for SPOT BTC-USDT fetched: 1 instruments.
+2025-05-09 19:02:12 - __main__ - INFO - {
+  "alias": "",
+  "auctionEndTime": "",
+  "baseCcy": "BTC",
+  "category": "1",
+  "contTdSwTime": "1605258225000",
+  "ctMult": "",
+  "ctType": "",
+  "ctVal": "",
+  "ctValCcy": "",
+  "expTime": "",
+  "futureSettlement": false,
+  "instFamily": "",
+  "instId": "BTC-USDT",
+  "instType": "SPOT",
+  "lever": "10",
+  "listTime": "1605258225000",
+  "lotSz": "0.00000001",
+  "maxIcebergSz": "9999999999.0000000000000000",
+  "maxLmtAmt": "20000000",
+  "maxLmtSz": "9999999999",
+  "maxMktAmt": "1000000",
+  "maxMktSz": "",
+  "maxStopSz": "",
+  "maxTriggerSz": "9999999999.0000000000000000",
+  "maxTwapSz": "9999999999.0000000000000000",
+  "minSz": "0.00001",
+  "openType": "call_auction",
+  "optType": "",
+  "quoteCcy": "USDT",
+  "ruleType": "normal",
+  "settleCcy": "",
+  "state": "live",
+  "stk": "",
+  "tickSz": "0.1",
+  "uly": ""
+}
+2025-05-09 19:02:12 - __main__ - INFO - 
+Fetching Fee Rates for SPOT BTC-USDT:
+2025-05-09 19:02:12 - __main__ - INFO - Fee rates for SPOT fetched successfully.
+2025-05-09 19:02:12 - __main__ - INFO - [
+  {
+    "category": "1",
+    "delivery": "",
+    "exercise": "",
+    "fiat": [],
+    "instType": "SPOT",
+    "level": "Lv1",
+    "maker": "-0.0008",
+    "makerU": "",
+    "makerUSDC": "",
+    "ruleType": "normal",
+    "taker": "-0.001",
+    "takerU": "",
+    "takerUSDC": "",
+    "ts": "1746817332978"
+  }
+]
+2025-05-09 19:02:12 - __main__ - INFO - 
+--- Testing WebSocket (will run for a short period if uncommented) ---
+2025-05-09 19:02:13 - __main__ - ERROR - Exception in private_websocket_handler connect/login/subscribe: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+Traceback (most recent call last):
+  File "/home/huzefan/py-arb-bot/arb_bot/connectors/okx_conn.py", line 320, in private_websocket_handler
+    async with websockets.connect(self.ws_private_url) as ws:
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 2, in __aenter__
+    return await self
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 12, in __await_impl__
+    transport, protocol = await self._creating_connection
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1103, in create_connection
+    transport, protocol = await self._create_connection_transport(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1121, in _create_connection_transport
+    protocol = protocol_factory()
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 365, in <lambda>
+    factory = lambda: create_protocol(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 45, in __init__
+    super().__init__(**kwds)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/protocol.py", line 172, in __init__
+    self._drain_lock = asyncio.Lock(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/locks.py", line 78, in __init__
+    super().__init__(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/mixins.py", line 17, in __init__
+    raise TypeError(
+TypeError: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+2025-05-09 19:02:13 - __main__ - INFO - Private WebSocket disconnected. Attempting to reconnect in 10 seconds...
+2025-05-09 19:02:13 - __main__ - ERROR - Exception in public_websocket_handler connect/subscribe: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+Traceback (most recent call last):
+  File "/home/huzefan/py-arb-bot/arb_bot/connectors/okx_conn.py", line 302, in public_websocket_handler
+    async with websockets.connect(self.ws_public_url) as ws:
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 2, in __aenter__
+    return await self
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 12, in __await_impl__
+    transport, protocol = await self._creating_connection
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1103, in create_connection
+    transport, protocol = await self._create_connection_transport(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1121, in _create_connection_transport
+    protocol = protocol_factory()
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 365, in <lambda>
+    factory = lambda: create_protocol(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 45, in __init__
+    super().__init__(**kwds)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/protocol.py", line 172, in __init__
+    self._drain_lock = asyncio.Lock(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/locks.py", line 78, in __init__
+    super().__init__(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/mixins.py", line 17, in __init__
+    raise TypeError(
+TypeError: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+2025-05-09 19:02:13 - __main__ - INFO - Public WebSocket disconnected. Attempting to reconnect in 10 seconds...
+2025-05-09 19:02:13 - __main__ - ERROR - Exception in private_websocket_handler connect/login/subscribe: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+Traceback (most recent call last):
+  File "/home/huzefan/py-arb-bot/arb_bot/connectors/okx_conn.py", line 320, in private_websocket_handler
+    async with websockets.connect(self.ws_private_url) as ws:
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 2, in __aenter__
+    return await self
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 12, in __await_impl__
+    transport, protocol = await self._creating_connection
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1103, in create_connection
+    transport, protocol = await self._create_connection_transport(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1121, in _create_connection_transport
+    protocol = protocol_factory()
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 365, in <lambda>
+    factory = lambda: create_protocol(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 45, in __init__
+    super().__init__(**kwds)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/protocol.py", line 172, in __init__
+    self._drain_lock = asyncio.Lock(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/locks.py", line 78, in __init__
+    super().__init__(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/mixins.py", line 17, in __init__
+    raise TypeError(
+TypeError: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+2025-05-09 19:02:13 - __main__ - INFO - Private WebSocket disconnected. Attempting to reconnect in 10 seconds...
+2025-05-09 19:02:13 - __main__ - ERROR - Exception in public_websocket_handler connect/subscribe: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+Traceback (most recent call last):
+  File "/home/huzefan/py-arb-bot/arb_bot/connectors/okx_conn.py", line 302, in public_websocket_handler
+    async with websockets.connect(self.ws_public_url) as ws:
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 2, in __aenter__
+    return await self
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/py35/client.py", line 12, in __await_impl__
+    transport, protocol = await self._creating_connection
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1103, in create_connection
+    transport, protocol = await self._create_connection_transport(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/base_events.py", line 1121, in _create_connection_transport
+    protocol = protocol_factory()
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 365, in <lambda>
+    factory = lambda: create_protocol(
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/client.py", line 45, in __init__
+    super().__init__(**kwds)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/site-packages/websockets/protocol.py", line 172, in __init__
+    self._drain_lock = asyncio.Lock(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/locks.py", line 78, in __init__
+    super().__init__(loop=loop)
+  File "/home/huzefan/miniconda3/envs/arb_env/lib/python3.10/asyncio/mixins.py", line 17, in __init__
+    raise TypeError(
+TypeError: As of 3.10, the *loop* parameter was removed from Lock() since it is no longer necessary
+2025-05-09 19:02:13 - __main__ - INFO - Public WebSocket disconnected. Attempting to reconnect in 10 seconds...
+2025-05-09 19:02:17 - __main__ - INFO - Cancelling WebSocket tasks...
+2025-05-09 19:02:17 - __main__ - INFO - WebSocket tasks cancelled.
+2025-05-09 19:07:12 - __main__ - INFO - Logging to file: /home/huzefan/py-arb-bot/arb_bot/logs/arb_bot.log
+2025-05-09 19:07:12 - __main__ - INFO - Settings loaded successfully from /home/huzefan/py-arb-bot/arb_bot/config/settings.yaml
+2025-05-09 19:07:12 - __main__ - INFO - Secrets loaded successfully from /home/huzefan/py-arb-bot/arb_bot/config/secrets.yaml
+2025-05-09 19:07:12 - __main__ - INFO - Configuration loaded. Mode: Simulated
+2025-05-09 19:07:12 - __main__ - INFO - OKX API Clients initialized.
+2025-05-09 19:07:12 - __main__ - INFO - --- Testing REST APIs ---
+2025-05-09 19:07:12 - __main__ - INFO - Account balance fetched successfully.
+2025-05-09 19:07:12 - __main__ - INFO - Balance for BTC: Avail: 1, Frozen: 0
+2025-05-09 19:07:12 - __main__ - INFO - Balance for OKB: Avail: 100, Frozen: 0
+2025-05-09 19:07:12 - __main__ - INFO - Balance for USDT: Avail: 3613.885999, Frozen: 0
+2025-05-09 19:07:12 - __main__ - INFO - Balance for USDC: Avail: 2498.000175, Frozen: 0
+2025-05-09 19:07:12 - __main__ - INFO - Balance for ETH: Avail: 0.4, Frozen: 0
+2025-05-09 19:07:12 - __main__ - INFO - 
+Fetching SPOT BTC-USDT instrument details:
+2025-05-09 19:07:12 - __main__ - INFO - Instrument details for SPOT BTC-USDT fetched: 1 instruments.
+2025-05-09 19:07:12 - __main__ - INFO - {
+  "alias": "",
+  "auctionEndTime": "",
+  "baseCcy": "BTC",
+  "category": "1",
+  "contTdSwTime": "1605258225000",
+  "ctMult": "",
+  "ctType": "",
+  "ctVal": "",
+  "ctValCcy": "",
+  "expTime": "",
+  "futureSettlement": false,
+  "instFamily": "",
+  "instId": "BTC-USDT",
+  "instType": "SPOT",
+  "lever": "10",
+  "listTime": "1605258225000",
+  "lotSz": "0.00000001",
+  "maxIcebergSz": "9999999999.0000000000000000",
+  "maxLmtAmt": "20000000",
+  "maxLmtSz": "9999999999",
+  "maxMktAmt": "1000000",
+  "maxMktSz": "",
+  "maxStopSz": "",
+  "maxTriggerSz": "9999999999.0000000000000000",
+  "maxTwapSz": "9999999999.0000000000000000",
+  "minSz": "0.00001",
+  "openType": "call_auction",
+  "optType": "",
+  "quoteCcy": "USDT",
+  "ruleType": "normal",
+  "settleCcy": "",
+  "state": "live",
+  "stk": "",
+  "tickSz": "0.1",
+  "uly": ""
+}
+2025-05-09 19:07:12 - __main__ - INFO - 
+Fetching Fee Rates for SPOT BTC-USDT:
+2025-05-09 19:07:12 - __main__ - INFO - Fee rates for SPOT fetched successfully.
+2025-05-09 19:07:12 - __main__ - INFO - [
+  {
+    "category": "1",
+    "delivery": "",
+    "exercise": "",
+    "fiat": [],
+    "instType": "SPOT",
+    "level": "Lv1",
+    "maker": "-0.0008",
+    "makerU": "",
+    "makerUSDC": "",
+    "ruleType": "normal",
+    "taker": "-0.001",
+    "takerU": "",
+    "takerUSDC": "",
+    "ts": "1746817632539"
+  }
+]
+2025-05-09 19:07:12 - __main__ - INFO - 
+--- Testing WebSocket (will run for a short period if uncommented) ---
+2025-05-09 19:07:12 - __main__ - INFO - Connected to private WebSocket: wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999
+2025-05-09 19:07:12 - __main__ - INFO - OKX Server time (ms): 1746817632852
+2025-05-09 19:07:12 - __main__ - INFO - Login request sent to WebSocket with timestamp: 1746817632
+2025-05-09 19:07:12 - __main__ - INFO - Connected to public WebSocket: wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999
+2025-05-09 19:07:12 - __main__ - INFO - Subscription request sent for channels: [{'channel': 'books', 'instId': 'BTC-USDT-SWAP'}]
+2025-05-09 19:07:12 - __main__ - INFO - Connected to private WebSocket: wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999
+2025-05-09 19:07:12 - __main__ - INFO - OKX Server time (ms): 1746817632895
+2025-05-09 19:07:12 - __main__ - INFO - Login request sent to WebSocket with timestamp: 1746817632
+2025-05-09 19:07:12 - __main__ - INFO - Connected to public WebSocket: wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999
+2025-05-09 19:07:12 - __main__ - INFO - Subscription request sent for channels: [{'channel': 'tickers', 'instId': 'BTC-USDT'}]
+2025-05-09 19:07:12 - __main__ - INFO - Subscription response: {"event":"subscribe","arg":{"channel":"books","instId":"BTC-USDT-SWAP"},"connId":"66ca292b"}
+2025-05-09 19:07:12 - __main__ - INFO - Successfully subscribed to books
+2025-05-09 19:07:12 - __main__ - INFO - WebSocket login response: {"event":"login","msg":"","code":"0","connId":"c6a30cb8"}
+2025-05-09 19:07:12 - __main__ - INFO - WebSocket login successful.
+2025-05-09 19:07:12 - __main__ - INFO - Subscription request sent for channels: [{'channel': 'account'}]
+2025-05-09 19:07:12 - __main__ - INFO - Subscription response: {"event":"subscribe","arg":{"channel":"tickers","instId":"BTC-USDT"},"connId":"64ec38ba"}
+2025-05-09 19:07:12 - __main__ - INFO - Successfully subscribed to tickers
+2025-05-09 19:07:12 - __main__ - INFO - Subscription response: {"event":"subscribe","arg":{"channel":"account"},"connId":"c6a30cb8"}
+2025-05-09 19:07:12 - __main__ - INFO - Successfully subscribed to account
+2025-05-09 19:07:12 - __main__ - INFO - WebSocket login response: {"event":"login","msg":"","code":"0","connId":"69392251"}
+2025-05-09 19:07:12 - __main__ - INFO - WebSocket login successful.
+2025-05-09 19:07:12 - __main__ - INFO - Subscription request sent for channels: [{'channel': 'orders', 'instType': 'SPOT'}]
+2025-05-09 19:07:12 - __main__ - INFO - Subscription response: {"event":"subscribe","arg":{"channel":"orders","instType":"SPOT"},"connId":"69392251"}
+2025-05-09 19:07:12 - __main__ - INFO - Successfully subscribed to orders
+2025-05-09 19:07:23 - __main__ - INFO - Cancelling WebSocket tasks...
+2025-05-09 19:07:23 - __main__ - INFO - WebSocket tasks cancelled.
