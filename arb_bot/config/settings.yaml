@@ -1,55 +1,88 @@
 # arb_bot/config/settings.yaml
 
-# OKX API 端点 - 这是脚本期望的结构
+# OKX API 端点配置
 api:
-  rest_endpoint: "https://www.okx.com" # SDK内部会处理模拟盘路径，所以主域名即可
-  # 根据您原有的 simulated: true，这里使用模拟盘的 WebSocket URL
-  ws_public: "wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999"
-  ws_private: "wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999"
+  rest_endpoint: "https://www.okx.com" # REST API 的基础 URL
+  # 模拟盘 WebSocket URL (brokerId=9999 表示模拟盘)
+  ws_public: "wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999" # 公共频道 WebSocket 地址
+  ws_private: "wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999" # 私有频道 WebSocket 地址
+  # 如果需要实盘交易，请取消注释并配置以下实盘 WebSocket URL
+  # ws_public_real: "wss://ws.okx.com:8443/ws/v5/public"
+  # ws_private_real: "wss://ws.okx.com:8443/ws/v5/private"
 
-exchange: # 保留您原有的 exchange 部分，以备其他模块使用
-  name: "okx"
+# 交易所相关配置
+exchange:
+  name: "okx" # 交易所名称
   simulated: true # true 代表模拟盘, false 代表实盘
-  # 以下为您原有的URL，新的api部分已提取所需信息
-  websocket_base_url_public: "wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999"
-  websocket_base_url_private: "wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999"
-  rest_api_base_url: "https://www.okx.com"
-  # 实盘 (如果需要)
-  # websocket_base_url_public_real: "wss://ws.okx.com:8443/ws/v5/public"
-  # websocket_base_url_private_real: "wss://ws.okx.com:8443/ws/v5/private"
 
+# 套利策略相关配置
 arbitrage:
-  core_currencies: ["USDT", "BTC", "ETH"]
+  # 核心套利币种，定义套利路径中涉及的币种
+  # 更新为 ETH-USDC-USDT 套利路径
+  core_currencies: ["USDT", "ETH", "USDC"]
+  # core_currencies: ["USDT", "DOGE", "USDC"] # 顺序：[起始稳定币, 主要套利资产, 中间稳定币]
+
+  # 参与套利的交易对 (instId)，必须是SPOT市场，且与core_currencies对应
+  # 这些交易对的数据将被 MarketDataHandler 监控
+  # 更新为 ETH 相关的交易对
   trading_pairs:
-    - "BTC-USDT"
-    - "ETH-BTC"
-    - "ETH-USDT"
-  min_profit_threshold: 0.002
-  fee_rate: 0.001
-  trade_amount_usdt: 10.0
+   - "ETH-USDT"  # 用于 ETH <-> USDT 转换
+   - "USDC-USDT" # 用于 USDT <-> USDC 转换 (通常保持不变)
+   - "ETH-USDC"  # 用于 ETH <-> USDC 转换
+  # trading_pairs:
+  #  - "DOGE-USDT"  # 用于 DOGE <-> USDT 转换
+  #  - "USDC-USDT"  # 用于 USDT <-> USDC 转换 (通常保持不变)
+  #  - "DOGE-USDC"  # 用于 DOGE <-> USDC 转换
 
-risk_mgmt:
-  max_single_trade_usd_value: 100
-  slippage_tolerance: 0.001
-  emergency_stop_loss_threshold: -0.05
-  max_consecutive_losses: 5
 
+  # 最小期望利润率阈值 (例如 0.002 表示 0.2%)
+  # 只有当预期利润率大于此阈值时，策略才会认为存在套利机会
+  min_profit_threshold: 0
+
+  # 预估的单边交易手续费率
+  # 建议使用 Taker 费率进行保守计算，因为套利通常需要立即成交。
+  # OKX VIP0 用户的 SPOT Taker 费率通常是 0.1% (即 0.001)。
+  # 模拟盘可能会提供返佣 (负费率)，但策略计算时仍应考虑实际可能发生的成本。
+  fee_rate: 0
+
+  # 单次完整套利循环中，第一步计划投入的USDT等值数量。
+  # !!重要!!: 此值需要足够大，以确保套利路径中每一步交易的数量都满足交易所对相应交易对的最小下单量(minSz)。
+  #           请通过 API (get_instrument_details) 或交易所官网查询各交易对的 minSz，并进行计算。
+  #           例如，如果10 USDT买入的ETH数量过少，不满足ETH-USDC的最小交易量，则需要提高此值。
+  #           初始测试建议从小额开始 (例如对应10-100 USDT价值的ETH)，验证通过后再逐步调整。
+  trade_amount_usdt: 100.0 # 维持100USDT作为初始投入金额，可根据ETH价格和最小交易量调整
+
+# 风险管理配置 (当前版本中以下参数未在策略核心逻辑中使用，已移除)
+# risk_mgmt:
+  # max_single_trade_usd_value: 100 # 已移除，原备注：此参数当前未在策略中使用
+  # slippage_tolerance: 0.001 # 已移除，原备注：此参数当前未在策略中使用
+  # emergency_stop_loss_threshold: -0.05 # 已移除，原备注：此参数当前未在策略中使用
+  # max_consecutive_losses: 5 # 已移除，原备注：此参数当前未在策略中使用
+
+# 日志配置
 logging:
-  level: "INFO"
-  file: "arb_bot.log"
-  max_bytes: 10485760
-  backup_count: 5
+  level: "INFO"  # 可选: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "arb_bot.log" # 日志文件名
+  max_bytes: 10485760 # 日志文件最大大小 (10MB)
+  backup_count: 5 # 保留的备份日志文件数量
 
+# WebSocket 频道订阅配置
 websocket_channels:
-  public:
-    - {channel: "books", instType: "SPOT"}
-    - {channel: "trades", instType: "SPOT"}
-  private:
-    - {channel: "account", ccy: ""}
-    - {channel: "orders", instType: "SPOT"}
+  public: # MarketDataHandler 将为 arbitrage.trading_pairs 中的每个交易对订阅这些频道
+    - {channel: "books", instType: "SPOT"} # 订单簿深度 (例如 books5, books, books-l2-tbt)
+    - {channel: "trades", instType: "SPOT"} # 最新成交
+  private: # 这些频道通常与特定用户相关 (在模拟盘中，私有频道可能行为有限或不同)
+    - {channel: "account"} # 账户余额变化
+    - {channel: "orders", instType: "SPOT"} # 订单更新
 
+# 其他通用配置
 other:
-  heartbeat_interval: 25
-  api_retry_delay: 5
-  max_api_retries: 3
+  heartbeat_interval: 15 # WebSocket PING/PONG 间隔 (秒)，用于保持连接活跃
+  api_retry_delay: 5     # API请求失败重试间隔 (秒)
+  max_api_retries: 3     # API请求最大重试次数
+  websocket_test_duration: 30 # WebSocket 测试运行的秒数 (用于 okx_conn.py 中的测试脚本)
+  run_websocket_tests_on_start: true # 是否在启动时自动运行 okx_conn.py 中的 WebSocket 测试脚本
+  order_timeout_seconds: 10 # 订单监控超时时间 (秒)，用于 OrderExecutor
+  order_poll_interval: 0.5  # 订单状态轮询间隔 (秒)，用于 OrderExecutor
+  opportunity_cooldown_seconds: 5 # 同一个套利机会（基于价格关键点）的执行冷却时间（秒）
 
